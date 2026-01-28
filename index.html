@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Serwis Rowerowy</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- GÓRNY BANER -->
+<a href="index.html" class="top-banner-link">
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo">🚲</div>
+      <div>
+        <h1>Serwis Rowerowy</h1>
+        <span>Profesjonalna obsługa rowerów</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- MENU -->
+<nav>
+  <a href="index.html" class="active">O serwisie</a>
+  <a href="realizacje.html">Realizacje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="dojazd.html">Dojazd</a>
+</nav>
+
+<!-- HERO / OPIS -->
+<section class="hero">
+  <div class="hero-card">
+  <h1 id="homeTitle"></h1> 
+  <p id="homeDesc"></p>
+  </div>
+</section>
+
+<!-- MARKI -->
+<section class="brands">
+  <h2>Marki, które serwisuję</h2>
+
+  <div class="brands-wrapper">
+    <div class="brands-track">
+      <!-- 1. zestaw -->
+      <div class="brand-box">Trek</div>
+      <div class="brand-box">Specialized</div>
+      <div class="brand-box">Giant</div>
+      <div class="brand-box">Canyon</div>
+      <div class="brand-box">Scott</div>
+      <div class="brand-box">Cube</div>
+      <div class="brand-box">Santa Cruz</div>
+      <div class="brand-box">YT Industries</div>
+      <div class="brand-box">Commencal</div>
+      <div class="brand-box">Norco</div>
+      <div class="brand-box">Merida</div>
+      <div class="brand-box">Orbea</div>
+      <div class="brand-box">Kross</div>
+      <div class="brand-box">NS Bikes</div>
+
+      <!-- 2. zestaw (KOPIA) -->
+      <div class="brand-box">Trek</div>
+      <div class="brand-box">Specialized</div>
+      <div class="brand-box">Giant</div>
+      <div class="brand-box">Canyon</div>
+      <div class="brand-box">Scott</div>
+      <div class="brand-box">Cube</div>
+      <div class="brand-box">Santa Cruz</div>
+      <div class="brand-box">YT Industries</div>
+      <div class="brand-box">Commencal</div>
+      <div class="brand-box">Norco</div>
+      <div class="brand-box">Merida</div>
+      <div class="brand-box">Orbea</div>
+      <div class="brand-box">Kross</div>
+      <div class="brand-box">NS Bikes</div>
+    </div>
+  </div>
+</section>
+
+<!-- USŁUGI -->
+<section class="services">
+  <h2>Zakres usług</h2>
+
+  <div class="services-grid">
+    <div class="service-box" id="serviceBox1"></div>
+    <div class="service-box" id="serviceBox2"></div>
+    <div class="service-box" id="serviceBox3"></div>
+    <div class="service-box" id="serviceBox4"></div>
+    <div class="service-box" id="serviceBox5"></div>
+    <div class="service-box" id="serviceBox6"></div>
+    <div class="service-box" id="serviceBox7"></div>
+    <div class="service-box" id="serviceBox8"></div>
+    <div class="service-box" id="serviceBox9"></div>
+    <div class="service-box" id="serviceBox10"></div>
+    <div class="service-box" id="serviceBox11"></div>
+    <div class="service-box" id="serviceBox12"></div>
+    <div class="service-box" id="serviceBox13"></div>
+    <div class="service-box" id="serviceBox14"></div>
+    <div class="service-box" id="serviceBox15"></div>
+    <div class="service-box" id="serviceBox16"></div>
+  </div>
+</section>
+
+
+<footer>© 2026 Serwis Rowerowy</footer>
+
+<script>
+/* ===== STRONA GŁÓWNA – WCZYTYWANIE TREŚCI ===== */
+
+/* HERO */
+document.getElementById("homeTitle").innerText =
+  localStorage.getItem("home_title") || "Serwis tworzony z pasją";
+
+document.getElementById("homeDesc").innerText =
+  localStorage.getItem("home_desc") || "Profesjonalny serwis i indywidualne podejście";
+
+/* ZAKRES USŁUG – 16 OKIENEK */
+for(let i = 1; i <= 16; i++){
+  const text = localStorage.getItem("service_" + i);
+  const box = document.getElementById("serviceBox" + i);
+
+  if(text && text.trim() !== ""){
+    box.innerText = text;
+  } else {
+    box.style.display = "none";
+  }
+}
+</script></body>
+</html>

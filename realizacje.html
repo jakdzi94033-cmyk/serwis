@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Realizacje</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- GÓRNY BANER -->
+<a href="index.html" class="top-banner-link">
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo">🚲</div>
+      <div>
+        <h1>Serwis Rowerowy</h1>
+        <span>Profesjonalna obsługa rowerów</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- MENU -->
+<nav>
+  <a href="index.html">O serwisie</a>
+  <a href="realizacje.html" class="active">Realizacje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="dojazd.html">Dojazd</a>
+</nav>
+
+
+<div class="photos" id="photos"></div>
+
+<footer>© 2026 Serwis Rowerowy</footer>
+
+<script>
+document.getElementById("realTitle").innerText =
+  localStorage.getItem("real_title") || "Nasze realizacje";
+
+document.getElementById("realDesc").innerText =
+  localStorage.getItem("real_desc") || "Zobacz nasze przykładowe naprawy.";
+</script>
+
+<script>
+  const container = document.getElementById("photos");
+
+  for (let i = 1; i <= 40; i++) {
+    const img = document.createElement("img");
+    img.src = `img/${i}.png`;
+
+    img.onerror = () => img.remove();
+
+    container.appendChild(img);
+  }
+</script>
+
+
+</body>
+</html>

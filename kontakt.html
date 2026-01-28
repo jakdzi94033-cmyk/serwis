@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Kontakt</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- GÓRNY BANER -->
+<a href="index.html" class="top-banner-link">
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo">🚲</div>
+      <div>
+        <h1>Serwis Rowerowy</h1>
+        <span>Profesjonalna obsługa rowerów</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- MENU -->
+<nav>
+  <a href="index.html">O serwisie</a>
+  <a href="realizacje.html">Realizacje</a>
+  <a href="kontakt.html" class="active">Kontakt</a>
+  <a href="dojazd.html">Dojazd</a>
+</nav>
+
+<!-- TREŚĆ -->
+<section class="container contact-page">
+
+  <div class="contact-layout">
+
+    <!-- LEWA STRONA -->
+    <div class="contact-info">
+      <h2>Kontakt</h2>
+
+      <p><strong>Ulica:</strong> <span id="contact_street"></span></p>
+      <p><strong>Miasto:</strong> <span id="contact_city"></span></p>
+      <p><strong>Telefon:</strong> <span id="contact_phone"></span></p>
+      <p><strong>Email:</strong> <span id="contact_mail"></span></p>
+<br>
+      <p><strong>Godziny otwarcia:</strong></p>
+      <p>Pon–Pt: <span id="hours_week"></span></p>
+      <p>Sobota: <span id="hours_sat"></span></p>
+      <p>Niedziela: nieczynne</p>
+    </div>
+
+    <!-- PRAWA STRONA -->
+    <div class="contact-box">
+      <h3>Zostaw wiadomość</h3>
+
+      <form onsubmit="sendForm(event)">
+        <input type="text" placeholder="Imię" required>
+        <input type="email" placeholder="Telefon kontaktowy" required>
+        <textarea placeholder="Napisz co trzeba zrobić oraz jaki rower a ja się z Tobą skontaktuję" required></textarea>
+        <button type="submit">Wyślij</button>
+        <div id="formInfo"></div>
+      </form>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- STOPKA -->
+<footer>© 2026 Serwis Rowerowy</footer>
+
+<!-- SKRYPTY -->
+<script>
+/* DANE KONTAKTOWE */
+[
+  "contact_phone",
+  "contact_street",
+  "contact_city",
+  "contact_mail"
+].forEach(id => {
+  document.getElementById(id).innerText =
+    localStorage.getItem(id) || "";
+});
+
+/* GODZINY */
+const weekFrom = localStorage.getItem("hours_week_from") || "";
+const weekTo   = localStorage.getItem("hours_week_to") || "";
+const satFrom  = localStorage.getItem("hours_sat_from") || "";
+const satTo    = localStorage.getItem("hours_sat_to") || "";
+
+document.getElementById("hours_week").innerText =
+  weekFrom && weekTo ? `${weekFrom}–${weekTo}` : "";
+
+document.getElementById("hours_sat").innerText =
+  satFrom && satTo ? `${satFrom}–${satTo}` : "";
+
+/* FORMULARZ */
+function sendForm(e) {
+  e.preventDefault();
+  document.getElementById("formInfo").innerText =
+    "✅ Wiadomość została wysłana (demo)";
+}
+</script>
+
+</body>
+</html>

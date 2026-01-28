@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Panel edycji</title>
+
+<style>
+body{
+  background:#eef2f8;
+  font-family:Arial, sans-serif;
+}
+
+.admin-editor{
+  max-width:1000px;
+  margin:40px auto;
+  background:#fff;
+  padding:30px;
+  border-radius:20px;
+  display:none;
+}
+
+h2{margin-bottom:20px}
+h3{margin-top:35px}
+
+.row{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:12px;
+}
+
+.row label{
+  min-width:140px;
+  font-weight:bold;
+}
+
+.row input,
+.row textarea{
+  flex:1;
+  padding:10px;
+  border-radius:8px;
+  border:1px solid #ccc;
+}
+
+textarea{min-height:70px}
+
+button{
+  padding:10px 16px;
+  border:none;
+  border-radius:10px;
+  background:#163a6b;
+  color:#fff;
+  cursor:pointer;
+}
+
+#info{
+  margin-top:20px;
+  color:green;
+  font-weight:bold;
+}
+</style>
+</head>
+
+<body>
+
+<div class="admin-editor" id="panel">
+
+<h2>Panel edycji treści</h2>
+
+<!-- ================= STRONA GŁÓWNA ================= -->
+<h3>Strona główna</h3>
+
+<div class="row">
+  <label>Tytuł</label>
+  <input id="home_title">
+  <button onclick="saveOne('home_title')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Opis</label>
+  <textarea id="home_desc"></textarea>
+  <button onclick="saveOne('home_desc')">Zapisz</button>
+</div>
+
+<!-- ================= ZAKRES USŁUG ================= -->
+<h3>Zakres usług</h3>
+
+<div id="services-editor">
+  <!-- 16 pól -->
+  <div class="row"><label>Usługa 1</label><input id="service_1"></div>
+  <div class="row"><label>Usługa 2</label><input id="service_2"></div>
+  <div class="row"><label>Usługa 3</label><input id="service_3"></div>
+  <div class="row"><label>Usługa 4</label><input id="service_4"></div>
+  <div class="row"><label>Usługa 5</label><input id="service_5"></div>
+  <div class="row"><label>Usługa 6</label><input id="service_6"></div>
+  <div class="row"><label>Usługa 7</label><input id="service_7"></div>
+  <div class="row"><label>Usługa 8</label><input id="service_8"></div>
+  <div class="row"><label>Usługa 9</label><input id="service_9"></div>
+  <div class="row"><label>Usługa 10</label><input id="service_10"></div>
+  <div class="row"><label>Usługa 11</label><input id="service_11"></div>
+  <div class="row"><label>Usługa 12</label><input id="service_12"></div>
+  <div class="row"><label>Usługa 13</label><input id="service_13"></div>
+  <div class="row"><label>Usługa 14</label><input id="service_14"></div>
+  <div class="row"><label>Usługa 15</label><input id="service_15"></div>
+  <div class="row"><label>Usługa 16</label><input id="service_16"></div>
+
+  <button onclick="saveServices()">Zapisz zakres usług</button>
+</div>
+
+<!-- ================= KONTAKT ================= -->
+<h3>Kontakt</h3>
+
+<div class="row">
+  <label>Ulica</label>
+  <input id="contact_street">
+  <button onclick="saveOne('contact_street')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Miasto</label>
+  <input id="contact_city">
+  <button onclick="saveOne('contact_city')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Telefon</label>
+  <input id="contact_phone">
+  <button onclick="saveOne('contact_phone')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Email</label>
+  <input id="contact_mail">
+  <button onclick="saveOne('contact_mail')">Zapisz</button>
+</div>
+
+<!-- ================= GODZINY ================= -->
+<h3>Godziny otwarcia</h3>
+
+<div class="row">
+  <label>Pon–Pt</label>
+  <input id="hours_week_from" placeholder="od">
+  <input id="hours_week_to" placeholder="do">
+  <button onclick="saveHours('week')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Sobota</label>
+  <input id="hours_sat_from" placeholder="od">
+  <input id="hours_sat_to" placeholder="do">
+  <button onclick="saveHours('sat')">Zapisz</button>
+</div>
+
+<div class="row">
+  <label>Niedziela</label>
+  <strong>nieczynne</strong>
+</div>
+
+<!-- ================= DOJAZD ================= -->
+<h3>Dojazd</h3>
+
+<div class="row">
+  <label>Opis</label>
+  <textarea id="directions_text"></textarea>
+  <button onclick="saveOne('directions_text')">Zapisz</button>
+</div>
+
+<p id="info"></p>
+</div>
+
+<script>
+/* ===== HASŁO ===== */
+const PASSWORD = "admin123";
+const entered = prompt("Podaj hasło dostępu:");
+
+if(entered === PASSWORD){
+  panel.style.display = "block";
+}else{
+  alert("Błędne hasło");
+  location.href = "index.html";
+}
+
+/* ===== WCZYTYWANIE ===== */
+const ids = [
+ "home_title","home_desc",
+ "contact_phone","contact_street","contact_city","contact_mail",
+ "directions_text",
+ "hours_week_from","hours_week_to",
+ "hours_sat_from","hours_sat_to"
+];
+
+ids.forEach(id=>{
+  if(document.getElementById(id)){
+    document.getElementById(id).value = localStorage.getItem(id) || "";
+  }
+});
+
+/* USŁUGI */
+for(let i=1;i<=16;i++){
+  const el = document.getElementById("service_"+i);
+  el.value = localStorage.getItem("service_"+i) || "";
+}
+
+/* ===== ZAPIS ===== */
+function saveOne(id){
+  localStorage.setItem(id, document.getElementById(id).value);
+  info.innerText = "✅ Zapisano";
+}
+
+function saveHours(type){
+  if(type==="week"){
+    localStorage.setItem("hours_week_from", hours_week_from.value);
+    localStorage.setItem("hours_week_to", hours_week_to.value);
+  }
+  if(type==="sat"){
+    localStorage.setItem("hours_sat_from", hours_sat_from.value);
+    localStorage.setItem("hours_sat_to", hours_sat_to.value);
+  }
+  info.innerText = "✅ Zapisano";
+}
+
+function saveServices(){
+  for(let i=1;i<=16;i++){
+    localStorage.setItem("service_"+i, document.getElementById("service_"+i).value);
+  }
+  info.innerText = "✅ Zakres usług zapisany";
+}
+</script>
+
+</body>
+</html>

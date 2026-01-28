@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<title>Dojazd</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- GÓRNY BANER -->
+<a href="index.html" class="top-banner-link">
+  <div class="top-banner">
+    <div class="banner-content">
+      <div class="logo">🚲</div>
+      <div>
+        <h1>Serwis Rowerowy</h1>
+        <span>Profesjonalna obsługa rowerów</span>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- MENU -->
+<nav>
+  <a href="index.html">O serwisie</a>
+  <a href="realizacje.html">Realizacje</a>
+  <a href="kontakt.html">Kontakt</a>
+  <a href="dojazd.html" class="active">Dojazd</a>
+</nav>
+
+<!-- TREŚĆ -->
+<section class="container dojazd-page">
+
+  <!-- DANE KONTAKTOWE (NA GÓRZE, WYŚRODKOWANE) -->
+  <div class="dojazd-contact">
+  <strong>Ulica:</strong> <span id="contact_street"></span>,
+  <span id="contact_city"></span>,
+  <strong>Telefon:</strong> <span id="contact_phone"></span>
+  <br>
+</div>
+
+  <!-- DWA ZDJĘCIA -->
+  <div class="dojazd-images">
+    <img src="img/mapa.png" alt="Mapa dojazdu">
+    <img src="img/street.png" alt="Widok Street View">
+  </div>
+
+  <!-- OPIS DOJAZDU -->
+  <div class="dojazd-text">
+    <p id="directionsText"></p>
+  </div>
+
+</section>
+
+<footer>© 2026 Serwis Rowerowy</footer>
+
+<script>
+/* DANE KONTAKTOWE */
+["contact_street","contact_city","contact_phone"].forEach(id=>{
+  document.getElementById(id).innerText =
+    localStorage.getItem(id) || "";
+});
+
+/* OPIS DOJAZDU */
+document.getElementById("directionsText").innerText =
+  localStorage.getItem("directions_text") || "";
+</script>
+
+</body>
+</html>
